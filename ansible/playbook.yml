@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - name: Task 01 - stop previous version docker
+      shell: docker stop spe-miniproject
+    - name: Task 02 - remove stopped container
+      shell: docker rm -f spe-miniproject
+    - name: Task 03 - remove docker images
+      shell: docker image rm -f manasa2850/spe-miniproject:latest
+
+    - name: Task 04 - create docker image
+      shell: docker run -d -p 80:80 --name spe-miniproject manasa2850/spe-miniproject:latest
